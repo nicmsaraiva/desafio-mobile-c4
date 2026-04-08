@@ -35,7 +35,7 @@ jobs:
           BROWSERSTACK_APP_ID: ${{ secrets.BROWSERSTACK_APP }}
           BS_DEVICE: 'Google Pixel 7'
           BS_OS_VERSION: '13.0'
-        run: npm run wdio:bs
+        run: npm run test:bs
 
       - name: Upload test results
         if: always()
