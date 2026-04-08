@@ -13,7 +13,7 @@ export const config = {
     capabilities: [{
         platformName: 'Android',
         'appium:deviceName': process.env.ANDROID_DEVICE_NAME || 'emulator-5554',
-        'appium:platformVersion': process.env.ANDROID_PLATFORM_VERSION || '15.0',
+        'appium:platformVersion': process.env.ANDROID_PLATFORM_VERSION || '17',
         'appium:automationName': 'UiAutomator2',
         'appium:app': process.env.ANDROID_APP_PATH || './apps/android.wdio.native.app.v2.2.0.apk',
         'appium:appPackage': 'com.wdiodemoapp',

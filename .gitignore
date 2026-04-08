@@ -8,14 +8,21 @@ node_modules/
 # Logs
 *.log
 appium.log
+log/
+logs/
 
 # Relatórios de teste
 allure-results/
 allure-report/
 reports/
+logs/performance-report/
 
 # APK/IPA (binários do app)
 apps/
+
+# BrowserStack / SDK
+key-metrics.json
+key-metrics.json.lock
 
 # Sistema
 .DS_Store
