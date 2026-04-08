@@ -1,6 +1,13 @@
 {
   "name": "desafio-mobile-c4",
   "type": "module",
+  "scripts": {
+    "wdio": "wdio run ./wdio.conf.js",
+    "wdio:bs": "wdio run ./wdio.bs.conf.js"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.1"
+  },
   "devDependencies": {
     "@wdio/appium-service": "^9.27.0",
     "@wdio/browserstack-service": "^9.27.0",
@@ -10,11 +17,5 @@
     "@wdio/spec-reporter": "^9.27.0",
     "@wdio/visual-service": "^9.2.1",
     "appium-uiautomator2-driver": "^7.1.0"
-  },
-  "scripts": {
-    "wdio": "wdio run ./wdio.conf.js"
-  },
-  "dependencies": {
-    "dotenv": "^17.4.1"
   }
 }
