@@ -1,0 +1,28 @@
+# Dependências
+node_modules/
+
+# Variáveis de ambiente
+.env
+.env.*
+
+# Logs
+*.log
+appium.log
+
+# Relatórios de teste
+allure-results/
+allure-report/
+reports/
+
+# APK/IPA (binários do app)
+apps/
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
