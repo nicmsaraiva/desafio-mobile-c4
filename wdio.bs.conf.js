@@ -15,7 +15,7 @@ export const config = {
         'appium:deviceName': process.env.BS_DEVICE || 'Google Pixel 7',
         'appium:platformVersion': process.env.BS_OS_VERSION || '13.0',
         'appium:automationName': 'UiAutomator2',
-        'appium:app': process.env.BROWSERSTACK_APP_ID,
+        'appium:app': process.env.BROWSERSTACK_APP,
         'appium:autoGrantPermissions': true,
         'appium:newCommandTimeout': 240,
         'bstack:options': {
