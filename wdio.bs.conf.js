@@ -15,13 +15,13 @@ export const config = {
         'appium:deviceName': process.env.BS_DEVICE || 'Google Pixel 7',
         'appium:platformVersion': process.env.BS_OS_VERSION || '13.0',
         'appium:automationName': 'UiAutomator2',
-        'appium:app': process.env.BROWSERSTACK_APP_ID,
         'appium:autoGrantPermissions': true,
         'appium:newCommandTimeout': 240,
         'bstack:options': {
             userName: process.env.BROWSERSTACK_USERNAME,
             accessKey: process.env.BROWSERSTACK_ACCESS_KEY,
-            appiumVersion: '2.0.0',
+            appiumVersion: '2.3.0',
+            app: process.env.BROWSERSTACK_APP_ID, 
             buildName: `wdio-build-${new Date().toISOString()}`,
             sessionName: 'wdio-test',
             debug: true,
@@ -36,7 +36,7 @@ export const config = {
     connectionRetryTimeout: 120000,
     connectionRetryCount: 3,
 
-    services: [['browserstack']],
+    services: ['browserstack'],
 
     framework: 'mocha',
     reporters: ['spec'],
