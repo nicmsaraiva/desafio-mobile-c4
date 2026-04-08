@@ -19,9 +19,9 @@ export async function afterTestHook(test, _context, { passed }) {
     if (!passed) {
         ensureScreenshotsDir()
 
-        const timestamp    = new Date().toISOString().replace(/[:.]/g, '-')
-        const testName     = sanitize(test.title)
-        const filename     = `FAIL_${testName}_${timestamp}.png`
+        const timestamp = new Date().toISOString().replace(/[:.]/g, '-')
+        const testName = sanitize(test.title)
+        const filename = `FAIL_${testName}_${timestamp}.png`
         const screenshotPath = path.join(SCREENSHOTS_DIR, filename)
 
         try {
