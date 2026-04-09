@@ -7,26 +7,23 @@ import { createRequire } from 'module'
 const require = createRequire(import.meta.url)
 const users = require('../data/users.json')
 
-describe('WDIO Demo App — Testes E2E', () => {
+describe('WDIO Demo App — E2E Tests', () => {
 
     beforeEach(async () => {
         await HomePage.navigateTo('Home')
     })
 
-    // ═══════════════════════════════════════════════════
-    //  Navigator
-    // ═══════════════════════════════════════════════════
 
     describe('Navigator', () => {
 
-        it('CT01 - deve exibir todas as tabs de navegação na tela inicial', async () => {
+        it('CT01 - should display all navigation tabs on the home screen', async () => {
             await expect($('~Login')).toBeDisplayed()
             await expect($('~Forms')).toBeDisplayed()
             await expect($('~Swipe')).toBeDisplayed()
             await expect($('~Drag')).toBeDisplayed()
         })
 
-        it('CT02 - deve navegar para cada tab e voltar para Home', async () => {
+        it('CT02 - should navigate to each tab and return to Home', async () => {
             for (const tab of ['Login', 'Forms', 'Swipe', 'Drag']) {
                 await HomePage.navigateTo(tab)
                 await expect($(`~${tab}`)).toBeDisplayed()
@@ -36,52 +33,44 @@ describe('WDIO Demo App — Testes E2E', () => {
         })
     })
 
-    // ═══════════════════════════════════════════════════
-    //  Login
-    // ═══════════════════════════════════════════════════
-
     describe('Login', () => {
 
         beforeEach(async () => {
             await HomePage.navigateTo('Login')
         })
 
-        it('CT03 - deve exibir os campos da tela de login', async () => {
+        it('CT03 - should display login screen fields', async () => {
             await expect($('~input-email')).toBeDisplayed()
             await expect($('~input-password')).toBeDisplayed()
             await expect($('~button-LOGIN')).toBeDisplayed()
             await expect($('~button-sign-up-container')).toBeDisplayed()
         })
 
-        it('CT04 - deve fazer login com credenciais válidas e validar mensagem', async () => {
+        it('CT04 - should login with valid credentials and validate success message', async () => {
             await LoginPage.login(users.valid.standard.email, users.valid.standard.password)
             const { title, message } = await LoginPage.confirmSuccess()
             expect(title).toBe('Success')
             expect(message).toBe('You are logged in!')
         })
 
-        it('CT05 - deve exibir sucesso mesmo com senha incorreta (comportamento do app)', async () => {
+        it('CT05 - should still show success with incorrect password (app behavior)', async () => {
             await LoginPage.login(users.invalid.wrongPassword.email, users.invalid.wrongPassword.password)
             const { title, message } = await LoginPage.confirmSuccess()
             expect(title).toBe('Success')
             expect(message).toBe('You are logged in!')
         })
 
-        it('CT06 - deve exibir erro com campos vazios', async () => {
+        it('CT06 - should display error with empty fields', async () => {
             await LoginPage.login(users.invalid.empty.email, users.invalid.empty.password)
             await expect(LoginPage.errorEnterValidEmail).toBeDisplayed()
             await expect(LoginPage.errorEnterInvalidPasswordLength).toBeDisplayed()
         })
 
-        it('CT07 - deve exibir erro com email em formato inválido', async () => {
+        it('CT07 - should display error with invalid email format', async () => {
             await LoginPage.login(users.invalid.badEmailFormat.email, users.invalid.badEmailFormat.password)
             await expect(LoginPage.errorEnterValidEmail).toBeDisplayed()
         })
     })
-
-    // ═══════════════════════════════════════════════════
-    //  Forms
-    // ═══════════════════════════════════════════════════
 
     describe('Forms', () => {
 
@@ -89,27 +78,27 @@ describe('WDIO Demo App — Testes E2E', () => {
             await HomePage.navigateTo('Forms')
         })
 
-        it('CT08 - deve exibir os elementos da tela de formulário', async () => {
+        it('CT08 - should display form screen elements', async () => {
             await expect($('~text-input')).toBeDisplayed()
             await expect($('~switch')).toBeDisplayed()
             await expect($('~button-Active')).toBeDisplayed()
             await expect($('~Dropdown')).toBeDisplayed()
         })
 
-        it('CT09 - deve preencher o campo de texto e verificar resultado', async () => {
-            await FormsPage.fillInput('Teste WebdriverIO')
+        it('CT09 - should fill input field and verify result', async () => {
+            await FormsPage.fillInput('WebdriverIO Test')
             const result = await FormsPage.getInputResult()
-            expect(result).toBe('Teste WebdriverIO')
+            expect(result).toBe('WebdriverIO Test')
         })
 
-        it('CT10 - deve limpar o campo de texto e verificar que está vazio', async () => {
-            await FormsPage.fillInput('Texto para limpar')
+        it('CT10 - should clear input field and verify it is empty', async () => {
+            await FormsPage.fillInput('Text to clear')
             await FormsPage.fillInput('')
             const result = await FormsPage.getInputResult()
             expect(result).toBe('')
         })
 
-        it('CT11 - deve preencher formulário com múltiplos valores (data-driven)', async () => {
+        it('CT11 - should fill form with multiple values (data-driven)', async () => {
             const inputs = ['WebdriverIO', 'Appium', 'Mobile Test', 'QA Automation']
             for (const input of inputs) {
                 await FormsPage.fillInput(input)
@@ -118,23 +107,23 @@ describe('WDIO Demo App — Testes E2E', () => {
             }
         })
 
-        it('CT12 - deve ativar e desativar o toggle switch', async () => {
+        it('CT12 - should toggle the switch on and off', async () => {
             const { before, after } = await FormsPage.toggleSwitch()
             expect(after).not.toBe(before)
         })
 
-        it('CT13 - deve selecionar opção "Appium is awesome" no dropdown', async () => {
+        it('CT13 - should select "Appium is awesome" from dropdown', async () => {
             await FormsPage.selectDropdownOption('Appium is awesome')
             await expect(FormsPage.dropdownSelected).toHaveText('Appium is awesome')
         })
 
-        it('CT14 - deve selecionar opção "This app is awesome" no dropdown', async () => {
+        it('CT14 - should select "This app is awesome" from dropdown', async () => {
             await FormsPage.selectDropdownOption('This app is awesome')
             await expect(FormsPage.dropdownSelected).toHaveText('This app is awesome')
         })
 
-        it('CT15 - deve submeter o formulário e validar modal (OK)', async () => {
-            await FormsPage.fillInput('Teste Submit')
+        it('CT15 - should submit form and validate modal (OK)', async () => {
+            await FormsPage.fillInput('Submit Test')
             await FormsPage.submit()
 
             const { title, message } = await FormsPage.getSubmitModalData()
@@ -145,8 +134,8 @@ describe('WDIO Demo App — Testes E2E', () => {
             await expect($('~button-Active')).toBeDisplayed()
         })
 
-        it('CT16 - deve submeter o formulário e cancelar o modal', async () => {
-            await FormsPage.fillInput('Teste Cancel')
+        it('CT16 - should submit form and cancel modal', async () => {
+            await FormsPage.fillInput('Cancel Test')
             await FormsPage.submit()
 
             const { title } = await FormsPage.getSubmitModalData()
@@ -156,8 +145,8 @@ describe('WDIO Demo App — Testes E2E', () => {
             await expect($('~button-Active')).toBeDisplayed()
         })
 
-        it('CT17 - deve submeter o formulário e clicar em Ask Me Later', async () => {
-            await FormsPage.fillInput('Teste Ask Me Later')
+        it('CT17 - should submit form and click "Ask Me Later"', async () => {
+            await FormsPage.fillInput('Ask Me Later Test')
             await FormsPage.submit()
 
             const { title } = await FormsPage.getSubmitModalData()
