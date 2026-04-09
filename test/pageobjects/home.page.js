@@ -2,11 +2,11 @@ import BasePage from './base.page.js'
 
 class HomePage extends BasePage {
 
-    get homeTab()  { return $('~Home') }
+    get homeTab() { return $('~Home') }
     get loginTab() { return $('~Login') }
     get formsTab() { return $('~Forms') }
     get swipeTab() { return $('~Swipe') }
-    get dragTab()  { return $('~Drag') }
+    get dragTab() { return $('~Drag') }
 
     static TABS = ['Home', 'Login', 'Forms', 'Swipe', 'Drag']
 
