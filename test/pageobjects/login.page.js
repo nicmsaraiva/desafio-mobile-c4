@@ -9,12 +9,12 @@ class LoginPage extends BasePage {
     get signUpButton() { return $('~button-sign-up-container') }
     get errorMessage() { return $('~generic-error-message') }
 
-    get successTitle() { return $(SELECTORS.modal.title()) }
-    get successMessage() { return $(SELECTORS.modal.message()) }
-    get okButton() { return $(SELECTORS.modal.buttonOk()) }
+    get successTitle() { return $(SELECTORS.modal.title) }
+    get successMessage() { return $(SELECTORS.modal.message) }
+    get okButton() { return $(SELECTORS.modal.buttonOk) }
 
-    get errorEnterValidEmail() { return $(SELECTORS.login.errorValidEmail()) }
-    get errorEnterInvalidPasswordLength() { return $(SELECTORS.login.errorPasswordLength()) }
+    get errorEnterValidEmail() { return $(SELECTORS.login.errorValidEmail) }
+    get errorEnterInvalidPasswordLength() { return $(SELECTORS.login.errorPasswordLength) }
 
     async login(email, password) {
         await this.fill('~input-email', email)

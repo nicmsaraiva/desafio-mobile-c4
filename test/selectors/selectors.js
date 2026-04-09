@@ -8,13 +8,16 @@ const SELECTORS = {
     },
 
     forms: {
-        dropdownOption: (text) => `//android.widget.CheckedTextView[@text="${text}"]`,
+        dropdownOption: (text) =>
+            `//android.widget.CheckedTextView[@text="${text}"]`,
         dropdownSelected: '//android.widget.EditText[@resource-id="text_input"]',
     },
 
     login: {
-        errorValidEmail: '//android.widget.TextView[@text="Please enter a valid email address"]',
-        errorPasswordLength: '//android.widget.TextView[@text="Please enter at least 8 characters"]',
+        errorValidEmail:
+            '//android.widget.TextView[@text="Please enter a valid email address"]',
+        errorPasswordLength:
+            '//android.widget.TextView[@text="Please enter at least 8 characters"]',
     },
 }
 

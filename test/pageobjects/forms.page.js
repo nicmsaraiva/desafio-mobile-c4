@@ -9,13 +9,13 @@ class FormsPage extends BasePage {
     get dropdown() { return $('~Dropdown') }
     get buttonActive() { return $('~button-Active') }
     get buttonInactive() { return $('~button-Inactive') }
-    get dropdownSelected() { return $(SELECTORS.forms.dropdownSelected()) }
+    get dropdownSelected() { return $(SELECTORS.forms.dropdownSelected) }
 
-    get submitModalTitle() { return $(SELECTORS.modal.title()) }
-    get submitModalMessage() { return $(SELECTORS.modal.message()) }
-    get submitModalOk() { return $(SELECTORS.modal.buttonOk()) }
-    get submitModalCancel() { return $(SELECTORS.modal.buttonCancel()) }
-    get submitModalLater() { return $(SELECTORS.modal.buttonLater()) }
+    get submitModalTitle() { return $(SELECTORS.modal.title) }
+    get submitModalMessage() { return $(SELECTORS.modal.message) }
+    get submitModalOk() { return $(SELECTORS.modal.buttonOk) }
+    get submitModalCancel() { return $(SELECTORS.modal.buttonCancel) }
+    get submitModalLater() { return $(SELECTORS.modal.buttonLater) }
 
     async fillInput(value) {
         await this.fill('~text-input', value)

@@ -94,7 +94,7 @@ npm run test:bs
 
 **Run on BrowserStack:**
 ```bash
-npm run wdio:bs
+npm run test:bs
 ```
 
 **Upload APK to BrowserStack:**
