@@ -3,23 +3,20 @@ import SELECTORS from '../selectors/selectors.js'
 
 class FormsPage extends BasePage {
 
-    // ─── Elements ─────────────────────────────────────
-    get inputField()       { return $('~text-input') }
-    get inputResult()      { return $('~input-text-result') }
-    get switchToggle()     { return $('~switch') }
-    get dropdown()         { return $('~Dropdown') }
-    get buttonActive()     { return $('~button-Active') }
-    get buttonInactive()   { return $('~button-Inactive') }
-    get dropdownSelected() { return $(SELECTORS.forms.dropdownSelected()) }
+    get inputField() { return $('~text-input') }
+    get inputResult() { return $('~input-text-result') }
+    get switchToggle() { return $('~switch') }
+    get dropdown() { return $('~Dropdown') }
+    get buttonActive() { return $('~button-Active') }
+    get buttonInactive() { return $('~button-Inactive') }
+    get dropdownSelected() { return $(SELECTORS.forms.dropdownSelected) }
 
-    // ─── Modal ───────────────────────────────────── 
-    get submitModalTitle()   { return $(SELECTORS.modal.title()) }
-    get submitModalMessage() { return $(SELECTORS.modal.message()) }
-    get submitModalOk()      { return $(SELECTORS.modal.buttonOk()) }
-    get submitModalCancel()  { return $(SELECTORS.modal.buttonCancel()) }
-    get submitModalLater()   { return $(SELECTORS.modal.buttonLater()) }
+    get submitModalTitle() { return $(SELECTORS.modal.title) }
+    get submitModalMessage() { return $(SELECTORS.modal.message) }
+    get submitModalOk() { return $(SELECTORS.modal.buttonOk) }
+    get submitModalCancel() { return $(SELECTORS.modal.buttonCancel) }
+    get submitModalLater() { return $(SELECTORS.modal.buttonLater) }
 
-    // ─── Actions ──────────────────────────────────────
     async fillInput(value) {
         await this.fill('~text-input', value)
     }
@@ -42,16 +39,16 @@ class FormsPage extends BasePage {
     async getSubmitModalData() {
         await this.submitModalTitle.waitForDisplayed({ timeout: 10000 })
         return {
-            title:   await this.submitModalTitle.getText(),
+            title: await this.submitModalTitle.getText(),
             message: await this.submitModalMessage.getText(),
         }
     }
 
     async dismissModal(action = 'ok') {
         const buttons = {
-            ok:     this.submitModalOk,
+            ok: this.submitModalOk,
             cancel: this.submitModalCancel,
-            later:  this.submitModalLater,
+            later: this.submitModalLater,
         }
         const btn = buttons[action]
         if (!btn) throw new Error(`Ação de modal inválida: "${action}". Use: ok, cancel, later`)

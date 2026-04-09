@@ -1,4 +1,6 @@
 import { config as dotenvConfig } from 'dotenv'
+import { afterTestHook, writeEnvironmentProperties } from './test/helpers/hooks.js'
+
 dotenvConfig()
 
 export const config = {
@@ -39,10 +41,27 @@ export const config = {
     ],
 
     framework: 'mocha',
-    reporters: ['spec'],
+
+    reporters: [
+        'spec',
+        ['allure', {
+            outputDir: 'allure-results',
+            disableWebdriverStepsReporting: false,
+            disableWebdriverScreenshotsReporting: false,
+        }],
+    ],
 
     mochaOpts: {
         ui: 'bdd',
-        timeout: 60000
+        timeout: 60000,
     },
+
+    onPrepare(_config, capabilities) {
+        writeEnvironmentProperties(capabilities, {
+            Environment: 'Local',
+            Appium_Service: 'local:4723',
+        })
+    },
+
+    afterTest: afterTestHook,
 }
